@@ -42,6 +42,15 @@ order by total_spend desc;
 
 /* Let's invite the artist who have written the most rock music in our dataset. write a query that returns the artist name and total track count of the top 10 rock bands? */
 
+select artist.artist_id, artist.name, count(artist.artist_id) as number_of_songs 
+from artist 
+inner join album on artist.artist_id = album.artist_id
+inner join track on album.album_id = track.album_id
+inner join genre on track.genre_id = genre.genre_id
+where genre.name = "Rock"
+group by artist.artist_id, artist.name
+order by number_of_songs desc limt 1;
+
 
 
 
