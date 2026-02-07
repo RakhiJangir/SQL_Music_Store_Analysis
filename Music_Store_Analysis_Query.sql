@@ -25,4 +25,10 @@ desc limit 3;
 /* Which city has the best customer? We would like to through a promotional music festival in the city we made the most money. 
 Write a query that return one city that have the highest sum of invoice totals. Return both city name and sum of total invoice. */
 
+select billing_city, sum(total) as total_spend 
+from invoice 
+group by billing_city 
+order by total_spend
+desc limit 1;
+
 
