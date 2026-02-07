@@ -51,6 +51,26 @@ where genre.name = "Rock"
 group by artist.artist_id, artist.name
 order by number_of_songs desc limt 1;
 
+/* Return all the track name that have a song length longer than the average song length.
+Return the name and milliseconds for each name. Order by the song length with the longest songs listed first. */
+
+Select name, milliseconds 
+from track where milliseconds > (select avg(milliseconds) from track) 
+order by milliseconds desc;
+
+/* select how much amount spent by each customer on artist? Write a query to return customer name, artist nae and total spent. */
+
+select customer.first_name, artist.name, sum(invoice_line.unit_price*invoice_linequantity) as total_spend
+from customer 
+inner join invoice on customer.customer_id = invoice.customer_id
+inner join invoice_line on invoice.invoice_id = invoice_line.invoice.id
+inner join track on invoice_line.track_id = track.track_id
+inner join album on track.album_id = album.album_id
+inner join artist on album.artist_id = album.artist_id
+group by customer.first_name, artist.name
+order by total_spend;
+
+
 
 
 
