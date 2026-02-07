@@ -31,4 +31,17 @@ group by billing_city
 order by total_spend
 desc limit 1;
 
+/* Who is the best customer. The customer who have spent the most money will be declared the best customer. write a query that returns the person who has spent the most money. */
+
+select customer.customer_id, customer.first_name, customer.last_name, sum(invoice.total) as total_spend 
+from customer
+inner join invoice on customer.customer_id = invoice.invoice_id 
+group by customer.customer_id, customer.first_name, customer.last_name
+order by total_spend desc;
+
+
+/* Let's invite the artist who have written the most rock music in our dataset. write a query that returns the artist name and total track count of the top 10 rock bands? */
+
+
+
 
