@@ -68,7 +68,20 @@ inner join track on invoice_line.track_id = track.track_id
 inner join album on track.album_id = album.album_id
 inner join artist on album.artist_id = album.artist_id
 group by customer.first_name, artist.name
-order by total_spend;
+order by total_spend limit 1;
+
+
+
+/* We want to find out most popular music genre for each country? We determine the most popular genre as the genre with the highest amount of spend. Write a query that returns each country and top genre. */
+
+Select customer.country, genre.name, sum(invoice.total) as total_spend from customer
+inner join invoice on customer.customer_id = invoice.customer_id
+inner join invoice_line on invoice.invoice_id = invoice_line.invoice_id
+inner join track on invoice_line.track_id = track.track_id
+inner join genre on track.genre_id = genre.genre_id
+group by customer.country, genre.name
+order by total_spend desc;
+
 
 
 
